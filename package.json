@@ -5,7 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "start-dev": "webpack -w & nodemon ./server/index.js"
+    "start-dev": "npm run build-watch & npm run start-server",
+    "start-server": "nodemon ./server/index.js",
+    "build-watch": "webpack -w"
   },
   "keywords": [],
   "author": "",
