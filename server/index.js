@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+const { db } = require('./db');
+
 const app = express();
 const port = process.env.PORT || 3000; // this can be very useful if you deploy to Heroku!
 
@@ -26,6 +28,8 @@ app.use(function(err, req, res, next) {
 });
 
 //lets get started
-app.listen(port, () => {
-  console.log('listening on port ', port);
+db.sync().then(() => {
+  app.listen(port, () => {
+    console.log('listening on port ', port);
+  });
 });
