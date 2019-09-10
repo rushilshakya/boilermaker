@@ -13,7 +13,9 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         options: {
-          presets: ['react', 'es2015'],
+          presets: [
+            ['@babel/preset-env', { useBuiltIns: 'entry', corejs: '^2.0' }],
+          ],
         },
       },
       // use the style-loader/css-loader combos for anything matching the .css extension
