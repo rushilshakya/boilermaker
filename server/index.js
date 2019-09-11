@@ -7,6 +7,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 
 const { db } = require('./db');
+require('../localSecrets'); // mutate the process.env object with your variables
 
 const dbStore = new SequelizeStore({ db: db });
 dbStore.sync();
