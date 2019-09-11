@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV === 'development') {
+  require('../localSecrets'); // this will mutate the process.env object with your secrets.
+}
+
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -7,15 +11,12 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 
 const { db } = require('./db');
-if (process.env.NODE_ENV === 'development') {
-  require('../localSecrets'); // this will mutate the process.env object with your secrets.
-}
 
 const dbStore = new SequelizeStore({ db: db });
 dbStore.sync();
 
 const app = express();
-const port = process.env.PORT || 3000; // this can be very useful if you deploy to Heroku!
+const port = process.env.PORT; // this can be very useful if you deploy to Heroku!
 
 //middlewares
 app.use(morgan('dev'));
@@ -24,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'a wildly insecure secret',
+    secret: process.env.SESSION_SECRET,
     store: dbStore,
     resave: false,
     saveUninitialized: false,
