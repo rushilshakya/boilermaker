@@ -8,7 +8,7 @@ const passport = require('passport');
 
 const { db } = require('./db');
 if (process.env.NODE_ENV === 'development') {
-  require('./localSecrets'); // this will mutate the process.env object with your secrets.
+  require('../localSecrets'); // this will mutate the process.env object with your secrets.
 }
 
 const dbStore = new SequelizeStore({ db: db });
